@@ -2,7 +2,7 @@ import json
 import os
 
 #dirname = os.path.dirname(__file__)
-settings_path = os.path.join(os.path.dirname(__file__), 'settings\\')
+settings_path = os.path.join(os.path.dirname(__file__), 'settings/')
 
 
 class printersettings:
@@ -61,6 +61,8 @@ class printersettings:
 
         with open(settings_path + name + '.json', 'w') as file:
             file.write(json.dumps(self._settings))
+
+        return None
 
     def __str__(self):
         s = ''

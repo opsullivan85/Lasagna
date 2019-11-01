@@ -1,0 +1,12 @@
+#FROM python:3.7
+FROM pymesh/pymesh:latest
+WORKDIR /root/
+COPY / /root/Lasagna
+ENV LASAGNA_PATH /root/Lasagna
+
+ENV NUM_CORES $NUM_CORES
+WORKDIR $LASAGNA_PATH
+
+
+RUN pip install -r $LASAGNA_PATH/requirements.txt
+#RUN python -c "from lasagna import run; run.main()"

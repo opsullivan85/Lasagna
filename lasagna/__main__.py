@@ -1,3 +1,6 @@
+from lasagna import run
+
 if __name__ == '__main__':
-    from lasagna import run
+    #from . import run
+    #import lasagna.run
     run.main()
