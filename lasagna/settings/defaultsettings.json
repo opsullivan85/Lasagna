@@ -1,7 +1,10 @@
 {
-	"Printer Name": "3D Printer", 
-		"Buildplate Dims": [
-			300, 
-			300]
-	
+  "Printer Name": "3D Printer",
+  "Buildplate Dims": [
+    300,
+    300
+  ],
+  "fillamentDia": 1.75,
+  "nozzleWidth": 0.4,
+  "pFeed": 500
 }

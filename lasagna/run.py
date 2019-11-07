@@ -1,16 +1,21 @@
 import trimesh
-#import pymesh
+# import pymesh
 from lasagna.printersettings import printersettings
 from lasagna.fileloader import fileloader
-import numpy
+from lasagna.gcodewriter import gcodewriter
+import numpy as np
 
 
 def main():
-    # print('Hello World!')
     # FileLoader.load('C:/Users/Owen/Desktop/3D Printer/Print Files/Fluffy_sheep_single___multi-material/files/single_no_support.STL')
-    settings = printersettings("defaultsettings.json")
+
+    settings = printersettings("defaultsettings")
     print(settings)
     settings.save()
+    print()
+    print(settings._settings)
+
+    # gcodewriter(np.asarray([[1, 1, 1, 1], [2, 2, 2, 2]]), "Name", "")
 
 
 '''

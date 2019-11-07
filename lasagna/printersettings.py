@@ -1,7 +1,7 @@
 import json
 import os
 
-#dirname = os.path.dirname(__file__)
+# dirname = os.path.dirname(__file__)
 settings_path = os.path.join(os.path.dirname(__file__), 'settings/')
 
 
@@ -10,13 +10,13 @@ class printersettings:
 
     """
 
-    def __init__(self, path: str = None) -> None:
+    def __init__(self, path: str = "defaultsettings") -> None:
         """ Initializes a new PrinterSettings object
 
         Parameters
         ----------
         path : str, optional
-            settings are loaded from here if included
+            Settings are loaded from here if included
 
         See Also
         --------
@@ -38,7 +38,7 @@ class printersettings:
         -------
         None
         """
-        with open(settings_path + name, 'r') as file:
+        with open(settings_path + name + '.json', 'r') as file:
             self._settings = json.load(file);
 
     def save(self, name: str = None) -> None:
