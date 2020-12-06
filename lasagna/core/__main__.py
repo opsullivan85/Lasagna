@@ -1,1 +1,1 @@
-from ..testpy import py
+from lasagna.testpy import py
