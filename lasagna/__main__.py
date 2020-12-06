@@ -3,4 +3,12 @@ import trimesh
 from trimesh.base import Trimesh
 
 if __name__ == '__main__':
-    pass
+    # attach to logger so trimesh messages will be printed to console
+    trimesh.util.attach_to_log()
+    mesh: Trimesh
+    mesh = trimesh.load('../Cube.STL')
+    print('here')
+    #print(mesh.face_adjacency)
+    print(mesh.edges_sorted)
+    #mesh.show()
+    print('done')
