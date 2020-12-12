@@ -23,7 +23,7 @@ def get_intersecting_faces_lst(tmesh: Trimesh, height: np.ndarray):
     intersection_mask = np.logical_and(np.logical_not(np.all(face_vertices, 1)), np.any(face_vertices, 1))
 
     # get this to work?
-    intersections = np.nonzero(intersection_mask)
+    # intersections = np.nonzero(intersection_mask)
 
     return intersection_mask
 
