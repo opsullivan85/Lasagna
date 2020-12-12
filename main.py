@@ -7,43 +7,22 @@ import trimesh
 from trimesh.base import Trimesh
 from time import time
 
-
-def _get_intersecting_faces(vertices: np.ndarray, edges_unique: np.ndarray, faces_unique_edges: np.ndarray,
-                            height: np.ndarray, mem_friendly: bool = False):
-    # are vertices above height
-    vertices = np.greater(np.repeat(vertices[:, 2, np.newaxis], height.shape[0], axis=1), height)
-
-    # each vertex appears twice here, but keeping them is faster than the overhead required to remove them
-    face_vertices = np.reshape(vertices[edges_unique][faces_unique_edges], (-1, 6, height.shape[0]))
-
-    # does face have vertices above and below a slice
-    intersection_mask = np.logical_and(np.logical_not(np.all(face_vertices, 1)), np.any(face_vertices, 1))
-
-    # https://stackoverflow.com/questions/46041811/performance-of-various-numpy-fancy-indexing-methods-also-with-numba
-
-    return intersection_mask
-
-
-def get_intersecting_faces(tmesh: Trimesh, height: np.ndarray, mem_friendly: bool = False):
-    vertices = np.asarray(tmesh.vertices)
-    edges_unique = np.asarray(tmesh.edges_unique)
-    faces_unique_edges = np.asarray(tmesh.faces_unique_edges)
-
-    return _get_intersecting_faces(vertices, edges_unique, faces_unique_edges, height, mem_friendly)
+from lasagna.mesh import Mesh
 
 
 if __name__ == '__main__':
-    # attach to logger so trimesh messages will be printed to console
-    # trimesh.util.attach_to_log()
 
-    mesh: Trimesh
-    mesh = trimesh.load('bunny.stl')
-    # mesh = trimesh.load('Cube.stl')
-    mesh = mesh.subdivide().subdivide()
+    tmesh: Trimesh
+    tmesh = trimesh.load('bunny.stl')
+    # tmesh = trimesh.load('Cube.stl')
+    tmesh = tmesh.subdivide().subdivide()
 
-    slices = np.linspace(mesh.bounds[0, 2], mesh.bounds[1, 2], 1000)  # 8.203062295913696
+    mesh = Mesh(tmesh)
+
+    heights = np.linspace(tmesh.bounds[0, 2], tmesh.bounds[1, 2], 1000)
 
     t = time()
-    get_intersecting_faces(mesh, slices)
+    mesh.get_intersecting_faces(heights)
     print()
     print(time() - t)
+
